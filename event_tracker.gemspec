@@ -4,9 +4,9 @@ require File.expand_path('../lib/event_tracker/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Jay Wengrow"]
   gem.email         = ["jaywngrw@gmail.com"]
-  gem.description   = %q{This is a simple event tracker using Ruby/Redis}
+  gem.description   = %q{Simple event tracker for Rails using Redis}
   gem.summary       = %q{Easily track custom events triggered by users of your Rails app and view their statistics on a dashboard.}
-  gem.homepage      = "http://github.com/jaywengrow/event_tracker"
+  gem.homepage      = "https://github.com/jaywengrow/event_tracker"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -14,6 +14,10 @@ Gem::Specification.new do |gem|
   gem.name          = "event_tracker"
   gem.require_paths = ["lib"]
   gem.version       = EventTracker::VERSION
+
+  gem.add_dependency 'redis',           '>= 2.1'
+  gem.add_dependency 'redis-namespace', '>= 1.1.0'
+  gem.add_dependency 'sinatra',         '>= 1.2.6'
 
   gem.add_development_dependency "rspec"
 end
