@@ -7,5 +7,9 @@ module EventTracker
   		@name = name
   	end
 
+  	def save
+  		EventTracker.redis.zadd(:events, @name, 1)
+  	end
+
   end
 end

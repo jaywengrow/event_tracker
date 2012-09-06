@@ -2,7 +2,6 @@ require "event_tracker/version"
 
 module EventTracker
   # Your code goes here...
-end
 
 # require 'split/experiment'
 # require 'split/alternative'
@@ -11,7 +10,7 @@ end
 # require 'split/configuration'
 # require 'redis/namespace'
 
-  # extend self
+  extend self
   # attr_accessor :configuration
 
   # Accepts:
@@ -69,4 +68,5 @@ end
 #     ActionController::Base.helper Split::Helper
 #   end
 # end
+end
 
