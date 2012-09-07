@@ -14,10 +14,14 @@ describe EventTracker::Event do
     event.score.should eq(0)
   end
 
-  it "should save to redis" do
-    event = EventTracker::Event.new(:signup)
-    event.save
-    EventTracker.redis.exists(:events).should be true
+  describe 'save' do
+
+    it "should save to redis" do
+      event = EventTracker::Event.new(:signup)
+      event.save
+      EventTracker.redis.exists(:events).should be true
+    end
+
   end
 
   describe 'find' do
@@ -30,6 +34,18 @@ describe EventTracker::Event do
     it "should not return a non-existing event" do
       EventTracker::Event.find(:no_such_event).should be_nil
     end
+  end
+
+  describe 'delete' do
+
+    it "should delete an existing event" do
+      event = EventTracker::Event.new(:signup)
+      event.save
+      
+      event.delete
+      EventTracker::Event.find(:signup).should be_nil
+    end
+
   end
 
 end

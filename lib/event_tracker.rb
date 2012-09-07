@@ -17,10 +17,8 @@ module EventTracker
   def redis=(server)
     if server.respond_to? :split
       if server =~ /redis\:\/\//
-        puts "A"
         redis = Redis.connect(:url => server, :thread_safe => true)
       else
-        puts "B"
         server, namespace = server.split('/', 2)
         host, port, db = server.split(':')
         redis = Redis.new(:host => host, :port => port,
@@ -30,10 +28,8 @@ module EventTracker
 
       @redis = Redis::Namespace.new(namespace, :redis => redis)
     elsif server.respond_to? :namespace=
-      puts "C"
       @redis = server
     else
-      puts "D"
       @redis = Redis::Namespace.new(:event_tracker, :redis => server)
     end
   end
