@@ -2,13 +2,24 @@ module EventTracker
   class Event
 
   	attr_accessor :name
+    attr_accessor :score
 
-  	def initialize(name)
+  	def initialize(name, score=0)
   		@name = name
+      @score = score
   	end
 
   	def save
-  		EventTracker.redis.zadd(:events, @name, 1)
+  		EventTracker.redis.zadd(:events, 1, @name)
+  	end
+
+  	def self.find(event)
+      score = EventTracker.redis.zscore(:events, event)
+      if score
+        event = Event.new(event, score)
+      else
+        nil
+      end
   	end
 
   end

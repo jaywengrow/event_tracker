@@ -1,14 +1,8 @@
 require "event_tracker/version"
+require "event_tracker/event"
+require 'redis/namespace'
 
 module EventTracker
-  # Your code goes here...
-
-# require 'split/experiment'
-# require 'split/alternative'
-# require 'split/helper'
-# require 'split/version'
-# require 'split/configuration'
-# require 'redis/namespace'
 
   extend self
   # attr_accessor :configuration
@@ -21,10 +15,12 @@ module EventTracker
   #   5. An instance of `Redis`, `Redis::Client`, `Redis::DistRedis`,
   #      or `Redis::Namespace`.
   def redis=(server)
-    if server.respond_to? :event_tracker
+    if server.respond_to? :split
       if server =~ /redis\:\/\//
+        puts "A"
         redis = Redis.connect(:url => server, :thread_safe => true)
       else
+        puts "B"
         server, namespace = server.split('/', 2)
         host, port, db = server.split(':')
         redis = Redis.new(:host => host, :port => port,
@@ -34,8 +30,10 @@ module EventTracker
 
       @redis = Redis::Namespace.new(namespace, :redis => redis)
     elsif server.respond_to? :namespace=
-        @redis = server
+      puts "C"
+      @redis = server
     else
+      puts "D"
       @redis = Redis::Namespace.new(:event_tracker, :redis => server)
     end
   end
