@@ -22,6 +22,12 @@ describe EventTracker::Event do
       EventTracker.redis.exists(:events).should be true
     end
 
+    it "should save score to redis associated with event" do
+      event = EventTracker::Event.new(:signup, 10)
+      event.save
+      EventTracker::Event.find(:signup).score.should eq(10)
+    end
+
   end
 
   describe 'find' do
@@ -46,6 +52,16 @@ describe EventTracker::Event do
       EventTracker::Event.find(:signup).should be_nil
     end
 
+  end
+
+  describe 'increase_points' do
+
+    it "should increase event's points by specified number" do
+      event = EventTracker::Event.new(:signup)
+      event.increase_score(3)
+      event.save
+      EventTracker::Event.find(:signup).score.should eq(3)
+    end
   end
 
 end

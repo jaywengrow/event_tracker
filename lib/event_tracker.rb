@@ -56,11 +56,11 @@ module EventTracker
 
 # Split.configure {}
 
-# if defined?(Rails)
-#   class ActionController::Base
-#     ActionController::Base.send :include, Split::Helper
-#     ActionController::Base.helper Split::Helper
-#   end
-# end
+if defined?(Rails)
+  class ActionController::Base
+    ActionController::Base.send :include, EventTracker::Helper
+    ActionController::Base.helper EventTracker::Helper
+  end
+end
 end
 
