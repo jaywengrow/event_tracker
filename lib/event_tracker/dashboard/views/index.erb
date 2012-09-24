@@ -1,0 +1,10 @@
+<% if @events.any? %>
+  <p class="intro">The list below contains all events.</p>
+
+  <% @events.each do |event| %>
+    <%= erb :_event, :locals => {:event => event} %>
+  <% end %>
+<% else %>
+  <p class="intro">No events have started yet, you need to define them in your code.</p>
+  <p class="intro">Check out the <a href='https://github.com/jaywengrow/event_tracker#readme'>Readme</a> for more help getting started.</p>
+<% end %>

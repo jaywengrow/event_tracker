@@ -18,6 +18,14 @@ describe EventTracker::Helper do
   		event.score.should eq(1)
   	end
 
+    it "should add specified number of points to an event" do
+      event = EventTracker::Event.new(:signup)
+      event.save
+      track_event(:signup, 7)
+      event = EventTracker::Event.find(:signup)
+      event.score.should eq(7)
+    end
+
   end
 
 end
