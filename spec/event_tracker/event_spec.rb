@@ -42,6 +42,19 @@ describe EventTracker::Event do
     end
   end
 
+  describe 'find_or_create' do
+    it "should return an existing event" do
+      event = EventTracker::Event.new(:signup)
+      event.save
+      EventTracker::Event.find_or_create(:signup).name.should eq(:signup)
+    end
+
+    it "should create a non-existing event" do
+      EventTracker::Event.find_or_create(:no_such_event).name.should eq(:no_such_event)
+    end
+
+  end
+
   describe 'all' do
     it "should return all events" do
       event = EventTracker::Event.new(:signup)

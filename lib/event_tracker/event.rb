@@ -18,6 +18,15 @@ module EventTracker
       end
     end
 
+    def self.find_or_create(event_name)
+      score = EventTracker.redis.zscore(:events, event_name)
+      if score
+        event = Event.new(event_name, score)
+      else
+        event = Event.new(event_name)
+      end
+    end
+
     def self.all
       Array(EventTracker.redis.zrange(:events, 0, -1)).map {|e| find(e.to_sym)}
     end
