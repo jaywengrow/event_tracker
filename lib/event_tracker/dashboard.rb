@@ -15,7 +15,7 @@ module EventTracker
     # helpers EventTracker::DashboardHelpers
 
     get '/' do
-      @events = EventTracker::Events.all
+      @events = EventTracker::Event.all
       erb :index
     end
 

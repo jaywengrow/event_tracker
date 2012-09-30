@@ -34,12 +34,25 @@ describe EventTracker::Event do
     it "should return an existing event" do
       event = EventTracker::Event.new(:signup)
       event.save
-      EventTracker::Event.find(:signup).name.should eql(:signup)
+      EventTracker::Event.find(:signup).name.should eq(:signup)
     end
 
     it "should not return a non-existing event" do
       EventTracker::Event.find(:no_such_event).should be_nil
     end
+  end
+
+  describe 'all' do
+    it "should return all events" do
+      event = EventTracker::Event.new(:signup)
+      event.save
+      second_event = EventTracker::Event.new(:purchase)
+      second_event.save
+      all_events = EventTracker::Event.all
+      all_events.first.name.should eq(:purchase) #purchase comes first alphabetically
+      all_events.last.name.should eq(:signup)
+    end
+
   end
 
   describe 'delete' do

@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'sinatra',         '>= 1.2.6'
 
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency 'rack-test',   '~> 0.6'
 end

@@ -18,6 +18,10 @@ module EventTracker
       end
     end
 
+    def self.all
+      Array(EventTracker.redis.zrange(:events, 0, -1)).map {|e| find(e.to_sym)}
+    end
+
   	def save
   		EventTracker.redis.zadd(:events, @score, @name)
   	end
