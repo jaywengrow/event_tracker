@@ -21,7 +21,7 @@ module EventTracker
     def self.find_or_create(event_name)
       score = EventTracker.redis.zscore(:events, event_name)
       if score
-        event = Event.new(event_name, score)
+        event = Event.new(event_name, score.to_i)
       else
         event = Event.new(event_name)
       end
