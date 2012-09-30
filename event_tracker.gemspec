@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = EventTracker::VERSION
 
   gem.add_dependency 'redis',           '>= 2.1'
-  gem.add_dependency 'redis-namespace', '>= 1.1.0'
+  gem.add_dependency 'redis-namespace', '>= 1.0.3'
   gem.add_dependency 'sinatra',         '>= 1.2.6'
 
   gem.add_development_dependency "rspec"
