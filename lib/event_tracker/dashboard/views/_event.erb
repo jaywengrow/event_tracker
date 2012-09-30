@@ -5,7 +5,7 @@
       Score: <%= event.score %>
     </h2>
     <div class='inline-controls'>
-      <!-- <form action="<%= url "/reset/#{experiment.name}" %>" method='post' onclick="return confirmReset()">
+      <!-- <form action="<%= url "/reset/#{event.name}" %>" method='post' onclick="return confirmReset()">
         <input type="submit" value="Reset Data">
       </form> -->
       <form action="<%= url "/#{event.name}" %>" method='post' onclick="return confirmDelete()">
