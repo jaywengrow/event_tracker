@@ -2,4 +2,14 @@
   <div class="event-header">
     <h2>
       Event: <%= event.name %>
+      Score: <%= event.score %>
     </h2>
+    <div class='inline-controls'>
+      <!-- <form action="<%= url "/reset/#{experiment.name}" %>" method='post' onclick="return confirmReset()">
+        <input type="submit" value="Reset Data">
+      </form> -->
+      <form action="<%= url "/#{event.name}" %>" method='post' onclick="return confirmDelete()">
+        <input type="hidden" name="_method" value="delete"/>
+        <input type="submit" value="Delete" class="red">
+      </form>
+    </div>

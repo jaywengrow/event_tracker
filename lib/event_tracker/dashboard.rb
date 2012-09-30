@@ -1,7 +1,6 @@
 require 'sinatra/base'
 require 'event_tracker'
-# require 'bigdecimal'
-# require 'split/dashboard/helpers'
+require 'event_tracker/dashboard/helpers'
 
 module EventTracker
   class Dashboard < Sinatra::Base
@@ -12,7 +11,7 @@ module EventTracker
     set :static, true
     set :method_override, true
 
-    # helpers EventTracker::DashboardHelpers
+    helpers EventTracker::DashboardHelpers
 
     get '/' do
       @events = EventTracker::Event.all
@@ -32,10 +31,10 @@ module EventTracker
     #   redirect url('/')
     # end
 
-    # delete '/:experiment' do
-    #   @experiment = Split::Experiment.find(params[:experiment])
-    #   @experiment.delete
-    #   redirect url('/')
-    # end
+    delete '/:event' do
+      @event = EventTracker::Event.find(params[:event])
+      @event.delete
+      redirect url('/')
+    end
   end
 end

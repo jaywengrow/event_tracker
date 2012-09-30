@@ -35,12 +35,14 @@ describe EventTracker::Dashboard do
   #   new_red_count.should eql(0)
   # end
 
-  # it "should delete an experiment" do
-  #   experiment = Split::Experiment.find_or_create('link_color', 'blue', 'red')
-  #   delete '/link_color'
-  #   last_response.should be_redirect
-  #   Split::Experiment.find('link_color').should be_nil
-  # end
+  it "should delete an event" do
+  	event = EventTracker::Event.new(:signup)
+    event.save
+    EventTracker::Event.find(:signup).should_not be_nil
+    delete '/signup'
+    last_response.should be_redirect
+    EventTracker::Event.find(:signup).should be_nil
+  end
 
   # it "should mark an alternative as the winner" do
   #   experiment = Split::Experiment.find_or_create('link_color', 'blue', 'red')
