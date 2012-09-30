@@ -12,7 +12,7 @@ module EventTracker
     def self.find(event_name)
       score = EventTracker.redis.zscore(:events, event_name)
       if score
-        event = Event.new(event_name, score)
+        event = Event.new(event_name, score.to_i)
       else
         nil
       end
