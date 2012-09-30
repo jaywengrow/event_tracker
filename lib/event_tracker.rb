@@ -1,5 +1,6 @@
 require "event_tracker/version"
 require "event_tracker/event"
+require 'event_tracker/helper'
 require 'redis/namespace'
 
 module EventTracker
