@@ -104,7 +104,7 @@ You may want to password protect that page, you can do so with `Rack::Auth::Basi
 Source hosted at [GitHub](http://github.com/jaywengrow/event_tracker).
 Report Issues/Feature requests on [GitHub Issues](http://github.com/jaywengrow/event_tracker/issues).
 
-Tests can be ran with `rake spec`
+Tests can be ran with `rake spec`. Note that the tests will only pass if you have a live connection to Redis.
 
 ### Note on Patches/Pull Requests
 
