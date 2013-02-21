@@ -1,9 +1,9 @@
-require "event_tracker/version"
-require "event_tracker/event"
-require 'event_tracker/helper'
+require "eventy/version"
+require "eventy/event"
+require 'eventy/helper'
 require 'redis/namespace'
 
-module EventTracker
+module Eventy
 
   extend self
   # attr_accessor :configuration
@@ -25,13 +25,13 @@ module EventTracker
         redis = Redis.new(:host => host, :port => port,
           :thread_safe => true, :db => db)
       end
-      namespace ||= :event_tracker
+      namespace ||= :eventy
 
       @redis = Redis::Namespace.new(namespace, :redis => redis)
     elsif server.respond_to? :namespace=
       @redis = server
     else
-      @redis = Redis::Namespace.new(:event_tracker, :redis => server)
+      @redis = Redis::Namespace.new(:eventy, :redis => server)
     end
   end
 
@@ -59,8 +59,8 @@ module EventTracker
 
 if defined?(Rails)
   class ActionController::Base
-    ActionController::Base.send :include, EventTracker::Helper
-    ActionController::Base.helper EventTracker::Helper
+    ActionController::Base.send :include, Eventy::Helper
+    ActionController::Base.helper Eventy::Helper
   end
 end
 end

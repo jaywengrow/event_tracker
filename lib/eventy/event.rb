@@ -1,4 +1,4 @@
-module EventTracker
+module Eventy
   class Event
 
   	attr_accessor :name
@@ -10,7 +10,7 @@ module EventTracker
   	end
 
     def self.find(event_name)
-      score = EventTracker.redis.zscore(:events, event_name)
+      score = Eventy.redis.zscore(:events, event_name)
       if score
         event = Event.new(event_name, score.to_i)
       else
@@ -19,7 +19,7 @@ module EventTracker
     end
 
     def self.find_or_create(event_name)
-      score = EventTracker.redis.zscore(:events, event_name)
+      score = Eventy.redis.zscore(:events, event_name)
       if score
         event = Event.new(event_name, score.to_i)
       else
@@ -28,15 +28,15 @@ module EventTracker
     end
 
     def self.all
-      Array(EventTracker.redis.zrange(:events, 0, -1)).map {|e| find(e.to_sym)}
+      Array(Eventy.redis.zrange(:events, 0, -1)).map {|e| find(e.to_sym)}
     end
 
   	def save
-  		EventTracker.redis.zadd(:events, @score, @name)
+  		Eventy.redis.zadd(:events, @score, @name)
   	end
 
     def delete
-      EventTracker.redis.zrem(:events, @name)
+      Eventy.redis.zrem(:events, @name)
     end
 
     def increase_score(points)

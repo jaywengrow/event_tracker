@@ -1,4 +1,4 @@
-module EventTracker
+module Eventy
   module DashboardHelpers
     def url(*path_parts)
       [ path_prefix, path_parts ].join("/").squeeze('/')

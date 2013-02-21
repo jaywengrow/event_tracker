@@ -1,14 +1,14 @@
-# EventTracker
+# Eventy
 
-EventTracker is a super-lightweight event tracking framework for Ruby on Rails. You can easily track any event and view the data on a built-in dashboard.
+Eventy is a super-lightweight event tracking framework for Ruby on Rails. You can easily track any event and view the data on a built-in dashboard.
 
 ## Requirements
 
 This has only been tested on Ruby on Rails version 3.
 
-EventTracker uses redis as a datastore.
+Eventy uses redis as a datastore.
 
-EventTracker only supports redis 2.0 or greater.
+Eventy only supports redis 2.0 or greater.
 
 If you're on OS X, Homebrew is the simplest way to install Redis:
 
@@ -21,7 +21,7 @@ You now have a Redis daemon running on 6379.
 
 Add this line to your application's Gemfile:
 
-    gem 'event_tracker', :git => "git://github.com/jaywengrow/event_tracker.git"
+    gem 'eventy', :git => "git://github.com/jaywengrow/eventy.git"
 
 And then execute:
 
@@ -29,19 +29,19 @@ And then execute:
 
 ## Configuration
 
-EventTracker is autoloaded when rails starts up, as long as you've configured redis it will 'just work'.
+Eventy is autoloaded when rails starts up, as long as you've configured redis it will 'just work'.
 
-You may want to change the Redis host and port EventTracker connects to, or set various other options at startup.
+You may want to change the Redis host and port Eventy connects to, or set various other options at startup.
 
-EventTracker has a `redis` setter which can be given a string or a Redis
-object. This means if you're already using Redis in your app, EventTracker
+Eventy has a `redis` setter which can be given a string or a Redis
+object. This means if you're already using Redis in your app, Eventy
 can re-use the existing connection.
 
-For our rails app we have a `config/initializers/event_tracker.rb` file where
-we load `config/event_tracker.yml` by hand and set the Redis information
+For our rails app we have a `config/initializers/eventy.rb` file where
+we load `config/eventy.yml` by hand and set the Redis information
 appropriately.
 
-Here's our `config/event_tracker.yml`:
+Here's our `config/eventy.yml`:
 
 ``` yaml
 development: localhost:6379
@@ -59,8 +59,8 @@ And our initializer:
 rails_root = Rails.root || File.dirname(__FILE__) + '/../..'
 rails_env = Rails.env || 'development'
 
-event_tracker_config = YAML.load_file(rails_root.to_s + '/config/event_tracker.yml')
-EventTracker.redis = event_tracker_config[rails_env]
+eventy_config = YAML.load_file(rails_root.to_s + '/config/eventy.yml')
+Eventy.redis = eventy_config[rails_env]
 ```
 
 ## Usage
@@ -83,26 +83,26 @@ This will assign 5 points to the 'user_earned_store_credit' event, and in this e
 
 ## Web Interface
 
-EventTracker comes with a Sinatra-based front end to get an overview of how your experiments are doing.
+Eventy comes with a Sinatra-based front end to get an overview of how your experiments are doing.
 
 You can mount this inside your app routes by first adding this to the Gemfile:
 
-    gem 'event_tracker', :git => "git://github.com/jaywengrow/event_tracker.git", :require => 'event_tracker/dashboard'
+    gem 'eventy', :git => "git://github.com/jaywengrow/eventy.git", :require => 'eventy/dashboard'
 
 Then adding this to config/routes.rb
 
-    mount EventTracker::Dashboard, :at => 'event_tracker'
+    mount Eventy::Dashboard, :at => 'eventy'
 
 You may want to password protect that page, you can do so with `Rack::Auth::Basic`
 
-    EventTracker::Dashboard.use Rack::Auth::Basic do |username, password|
+    Eventy::Dashboard.use Rack::Auth::Basic do |username, password|
       username == 'admin' && password == 'p4s5w0rd'
     end
 
 ## Development
 
-Source hosted at [GitHub](http://github.com/jaywengrow/event_tracker).
-Report Issues/Feature requests on [GitHub Issues](http://github.com/jaywengrow/event_tracker/issues).
+Source hosted at [GitHub](http://github.com/jaywengrow/eventy).
+Report Issues/Feature requests on [GitHub Issues](http://github.com/jaywengrow/eventy/issues).
 
 Tests can be ran with `rake spec`. Note that the tests will only pass if you have a live connection to Redis.
 

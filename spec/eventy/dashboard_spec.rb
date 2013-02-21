@@ -1,15 +1,15 @@
 require 'spec_helper'
 require 'rack/test'
-require 'event_tracker/dashboard'
+require 'eventy/dashboard'
 
-describe EventTracker::Dashboard do
+describe Eventy::Dashboard do
   include Rack::Test::Methods
 
   def app
-    @app ||= EventTracker::Dashboard
+    @app ||= Eventy::Dashboard
   end
 
-  before(:each) { EventTracker.redis.flushall }
+  before(:each) { Eventy.redis.flushall }
 
   it "should respond to /" do
     get '/'
@@ -36,12 +36,12 @@ describe EventTracker::Dashboard do
   # end
 
   it "should delete an event" do
-  	event = EventTracker::Event.new(:signup)
+  	event = Eventy::Event.new(:signup)
     event.save
-    EventTracker::Event.find(:signup).should_not be_nil
+    Eventy::Event.find(:signup).should_not be_nil
     delete '/signup'
     last_response.should be_redirect
-    EventTracker::Event.find(:signup).should be_nil
+    Eventy::Event.find(:signup).should be_nil
   end
 
   # it "should mark an alternative as the winner" do

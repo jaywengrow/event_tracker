@@ -1,8 +1,8 @@
 require 'sinatra/base'
-require 'event_tracker'
-require 'event_tracker/dashboard/helpers'
+require 'eventy'
+require 'eventy/dashboard/helpers'
 
-module EventTracker
+module Eventy
   class Dashboard < Sinatra::Base
     dir = File.dirname(File.expand_path(__FILE__))
 
@@ -11,10 +11,10 @@ module EventTracker
     set :static, true
     set :method_override, true
 
-    helpers EventTracker::DashboardHelpers
+    helpers Eventy::DashboardHelpers
 
     get '/' do
-      @events = EventTracker::Event.all
+      @events = Eventy::Event.all
       erb :index
     end
 
@@ -32,7 +32,7 @@ module EventTracker
     # end
 
     delete '/:event' do
-      @event = EventTracker::Event.find(params[:event])
+      @event = Eventy::Event.find(params[:event])
       @event.delete
       redirect url('/')
     end
