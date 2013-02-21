@@ -27,10 +27,6 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install event_tracker
-
 ## Configuration
 
 EventTracker is autoloaded when rails starts up, as long as you've configured redis it will 'just work'.
