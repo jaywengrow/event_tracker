@@ -21,7 +21,7 @@ You now have a Redis daemon running on 6379.
 
 Add this line to your application's Gemfile:
 
-    gem 'event_tracker'
+    gem 'event_tracker', :git => "git://github.com/jaywengrow/event_tracker.git"
 
 And then execute:
 
@@ -91,7 +91,7 @@ EventTracker comes with a Sinatra-based front end to get an overview of how your
 
 You can mount this inside your app routes by first adding this to the Gemfile:
 
-    gem 'event_tracker', :require => 'event_tracker/dashboard'
+    gem 'event_tracker', :git => "git://github.com/jaywengrow/event_tracker.git", :require => 'event_tracker/dashboard'
 
 Then adding this to config/routes.rb
 
