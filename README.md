@@ -1,6 +1,6 @@
 # EventTracker
 
-EventTracker is a super-lightweight event tracking framework for Ruby on Rails. You can easily track anything and everything in any part of your codebase and view the data on a built-in dashboard.
+EventTracker is a super-lightweight event tracking framework for Ruby on Rails. You can easily track any event and view the data on a built-in dashboard.
 
 ## Requirements
 
